@@ -39,7 +39,7 @@ http:
         certResolver: letsencrypt
 
     web-media-router:
-      rule: 'Host(``) && PathPrefix(`/media/`)'
+      rule: 'Host(`johanna-zimmermann.com`) || Host(`www.johanna-zimmermann.com`) && PathPrefix(`/media/`)'
       entryPoints:
         - web-secure
       middlewares:
