@@ -1,5 +1,11 @@
 version: '3'
 
+networks:
+  web:
+    external: true
+  django-johanna:
+    external: false
+
 volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
@@ -19,9 +25,20 @@ services:
       - postgres
       - redis
     env_file:
-      - ./.envs/..production/.django
-      - ./.envs/..production/.postgres
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
     command: /start
+    networks:
+      - web
+      - django-johanna
+    labels:
+      - traefik.http.routers.django-johanna.rule=Host(`johanna-zimmermann.com`)
+      - traefik.http.routers.django-johanna.tls=true
+      - traefik.http.routers.django-johanna.tls.certresolver=le-resolver
+      - traefik.services.django-johanna.loadbalancer.server.port=5000
+      - traefik.http.middlewares.csrf.headers.hostsproxyheaders='X-CSRFToken'
+    ports:
+      - 5000:5000
 
   postgres:
     build:
@@ -33,22 +50,17 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/..production/.postgres
-
-  traefik:
-    build:
-      context: .
-      dockerfile: ./compose/production/traefik/Dockerfile
-    image: portfolio_johanna_production_traefik
-    depends_on:
-      - django
-    volumes:
-      - production_traefik:/etc/traefik/acme
-    ports:
-      - '0.0.0.0:80:80'
-      - '0.0.0.0:443:443'
+    networks:
+      - django-johanna
+    labels:
+      - traefik.enable=false
 
   redis:
     image: redis:6
+    networks:
+      - django-johanna
+    labels:
+      - traefik.enable=false
 
   nginx:
     build:
@@ -59,3 +71,11 @@ services:
       - django
     volumes:
       - production_django_media:/usr/share/nginx/media:ro
+    networks:
+      - django-johanna
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.services.django-johanna.loadbalancer.server.port=5001
+    ports:
+      - 5001:80
