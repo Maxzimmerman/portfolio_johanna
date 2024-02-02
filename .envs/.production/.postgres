@@ -1,1 +1,7 @@
-pit
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=portfolio_johanna
+POSTGRES_USER=XZelrAJNENgZthpxZSGUaCJvwLVJJslR
+POSTGRES_PASSWORD=rxJHAiYgz7TC0nbrVJgWdsqVKw6uPGiKLDuCQj5c9XRfxVBizrMg0L5L3OCudsd6

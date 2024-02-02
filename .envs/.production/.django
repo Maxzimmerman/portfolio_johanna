@@ -6,7 +6,7 @@ DJANGO_SECRET_KEY=gau2mqn#nfg3nb$n!(=jj+59qq&4y60#sq_(3)y5sw8!ec*)w
 DJANGO_ADMIN_URL=ichbinadmin-und-du-nicht
 DJANGO_ALLOWED_HOSTS=johanna-zimmermann.com
 
-# admin = max-zimmerman.online/fejioawgurhgiureuhewfifw/
+# admin = max-zimmerman.online/ichbinadmin-und-du-nicht/
 
 # Security
 # ------------------------------------------------------------------------------
