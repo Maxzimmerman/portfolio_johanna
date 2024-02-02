@@ -1,0 +1,27 @@
+# General
+# ------------------------------------------------------------------------------
+# DJANGO_READ_DOT_ENV_FILE=True
+DJANGO_SETTINGS_MODULE=config.settings.production
+DJANGO_SECRET_KEY=gau2mqn#nfg3nb$n!(=jj+59qq&4y60#sq_(3)y5sw8!ec*)w
+DJANGO_ADMIN_URL=ichbinadmin-und-du-nicht
+DJANGO_ALLOWED_HOSTS=johanna-zimmermann.com
+
+# admin = max-zimmerman.online/fejioawgurhgiureuhewfifw/
+
+# Security
+# ------------------------------------------------------------------------------
+# TIP: better off using DNS, however, redirect is OK too
+DJANGO_SECURE_SSL_REDIRECT=False
+
+# django-allauth
+# ------------------------------------------------------------------------------
+DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+
+# Gunicorn
+# ------------------------------------------------------------------------------
+WEB_CONCURRENCY=4
+
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
