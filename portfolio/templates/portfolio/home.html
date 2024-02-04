@@ -43,33 +43,14 @@
     </header>
     <!-- header area end -->
     <!-- slider area start -->
-    <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="{% static 'images/bg/slider-bg.jpg' %}">
+    <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="{{ home.image.url }}">
         <div class="container">
             <div class="slider-content">
-                <h2 class="txtanim1"><span>I'm</span> <span>lucy</span> <span>Doe</span></h2>
+                <h2 class="txtanim1"><span style="color: red">{{ home.name }}</span> </h2>
                 <h4 class="txtanim1 delay1">
-                    <span>W</span>
-                    <span>e</span>
-                    <span>b</span>
-                    <span>D</span>
-                    <span>e</span>
-                    <span>v</span>
-                    <span>e</span>
-                    <span>l</span>
-                    <span>o</span>
-                    <span>p</span>
-                    <span>e</span>
-                    <span>r</span>
+                    <span style="color: red">{{ home.job_role }}</span>
                 </h4>
             </div>
-        </div>
-        <div class="white_svg svg_white">
-            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
-                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />
-            </svg>
-        </div>
-        <div class="txtanim1 next-section">
-            <span><a href="#about">about us <strong><i class="fa fa-question-circle"></i></strong></a></span>
         </div>
     </section>
     <!-- slider area end -->
@@ -109,6 +90,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="single-service txt2_is_show">
+                        <img src="{% static 'images/portfolio/img1.jpg' %}">
                         <div class="icon"><span class="flaticon-web-design"></span></div>
                         <div class="srvc-content">
                             <h4>Web Design</h4>
@@ -118,6 +100,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="single-service txt2_is_show">
+                        <img src="{% static 'images/portfolio/img1.jpg' %}">
                         <div class="icon"><span class="flaticon-settings"></span></div>
                         <div class="srvc-content">
                             <h4>Illustrator</h4>
@@ -127,6 +110,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="single-service txt2_is_show">
+                        <img src="{% static 'images/portfolio/img1.jpg' %}">
                         <div class="icon"><span class="flaticon-adobe"></span></div>
                         <div class="srvc-content">
                             <h4>Branding Identity</h4>
@@ -143,60 +127,60 @@
         </div>
     </div>
     <!-- service area end -->
-    <!-- portfolio area start -->
-    <section class="fortfolio-area bg-gray pt--100 pb--200" id="portfolio">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="txt2_is_show">Our Portfolio</h2>
-            </div>
-            <div class="fortfolio-filter">
-                <button class="active" data-filter="*">All</button>
-                <button data-filter=".web">Web Design</button>
-                <button data-filter=".design">Graphics Design</button>
-                <button data-filter=".marketing">Marketing</button>
-            </div>
-            <div class="portfolio-masonary row" id="container">
-                <div class="prt-grid marketing design col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-video" href="https://www.youtube.com/watch?v=eDiA1p5DlLg">
-                            <span class="flaticon-play-button"></span>
-                            <img src="{% static 'images/portfolio/img1.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                </div>
-                <div class="prt-grid marketing web col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-img" href="{% static 'images/portfolio/img2.jpg' %}"><img src="{% static 'images/portfolio/img2.jpg' %}" alt="image"></a>
-                    </div>
-                </div>
-                <div class="prt-grid col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-img" href="{% static 'images/portfolio/img3.jpg' %}"><img src="{% static 'images/portfolio/img3.jpg' %}" alt="image"></a>
-                    </div>
-                </div>
-                <div class="prt-grid design marketing col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-img" href="{% static 'images/portfolio/img4.jpg' %}"><img src="{% static 'images/portfolio/img4.jpg' %}" alt="image"></a>
-                    </div>
-                </div>
-                <div class="prt-grid web design col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-img" href="{% static 'images/portfolio/img5.jpg' %}"><img src="{% static 'images/portfolio/img5.jpg' %}" alt="image"></a>
-                    </div>
-                </div>
-                <div class="prt-grid design marketing col-md-4 col-sm-6">
-                    <div class="prt-item">
-                        <a class="expand-img" href="{% static 'images/portfolio/img6.jpg' %}"><img src="{% static 'images/portfolio/img6.jpg' %}" alt="image"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="white_svg svg_white">
-            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
-                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />
-            </svg>
-        </div>
-    </section>
+{#    <!-- portfolio area start -->#}
+{#    <section class="fortfolio-area bg-gray pt--100 pb--200" id="portfolio">#}
+{#        <div class="container">#}
+{#            <div class="section-title">#}
+{#                <h2 class="txt2_is_show">Our Portfolio</h2>#}
+{#            </div>#}
+{#            <div class="fortfolio-filter">#}
+{#                <button class="active" data-filter="*">All</button>#}
+{#                <button data-filter=".web">Web Design</button>#}
+{#                <button data-filter=".design">Graphics Design</button>#}
+{#                <button data-filter=".marketing">Marketing</button>#}
+{#            </div>#}
+{#            <div class="portfolio-masonary row" id="container">#}
+{#                <div class="prt-grid marketing design col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-video" href="https://www.youtube.com/watch?v=eDiA1p5DlLg">#}
+{#                            <span class="flaticon-play-button"></span>#}
+{#                            <img src="{% static 'images/portfolio/img1.jpg' %}" alt="image">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="prt-grid marketing web col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-img" href="{% static 'images/portfolio/img2.jpg' %}"><img src="{% static 'images/portfolio/img2.jpg' %}" alt="image"></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="prt-grid col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-img" href="{% static 'images/portfolio/img3.jpg' %}"><img src="{% static 'images/portfolio/img3.jpg' %}" alt="image"></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="prt-grid design marketing col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-img" href="{% static 'images/portfolio/img4.jpg' %}"><img src="{% static 'images/portfolio/img4.jpg' %}" alt="image"></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="prt-grid web design col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-img" href="{% static 'images/portfolio/img5.jpg' %}"><img src="{% static 'images/portfolio/img5.jpg' %}" alt="image"></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="prt-grid design marketing col-md-4 col-sm-6">#}
+{#                    <div class="prt-item">#}
+{#                        <a class="expand-img" href="{% static 'images/portfolio/img6.jpg' %}"><img src="{% static 'images/portfolio/img6.jpg' %}" alt="image"></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="white_svg svg_white">#}
+{#            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">#}
+{#                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />#}
+{#            </svg>#}
+{#        </div>#}
+{#    </section>#}
     <!-- portfolio area end -->
     <!-- contact area start -->
     <section class="contact-area ptb--100" id="contact">
