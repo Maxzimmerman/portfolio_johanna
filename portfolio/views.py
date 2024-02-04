@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Home
+from .models import Home, Header, HeaderLinks
+from django.views.generic import ListView, DetailView
+
 
 # Create your views here.
 
-class HomeView(View):
-    def get(self, request):
-        home = Home.objects.first()
+class HomeView(ListView):
+    template_name = 'portfolio/home.html'
+    model = Home
 
-        context = {"home": home}
-
-        return render(request, "portfolio/home.html", context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["header"] = Header.objects.prefetch_related('links').all()
+        return context

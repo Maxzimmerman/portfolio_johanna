@@ -19,17 +19,14 @@
                 <div class="row align-items-center">
                     <div class="col-md-3 col-sm-12">
                         <div class="logo">
-                            <a href="index.html"><img src="" alt="logo"></a>
+                            <a href="index.html"><img src="{{ header.icon.url }}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-9 d-none d-md-block">
                         <div class="main-menu">
                             <nav class="nav-menu">
                                 <ul id="nav_menu">
-                                    <li class="active"><a data-hover="home" href="#home"><span>Home</span></a></li>
-                                    <li><a data-hover="about" href="#about"><span>About</span></a></li>
-                                    <li><a data-hover="portfolio" href="#portfolio"><span>Portfolio</span></a></li>
-                                    <li><a data-hover="contact" href="#contact"><span>Contact</span></a></li>
+                                    <li class="active"><a data-hover="{{ header.links.data_hover }}" href="{{ header.links.href }}"><span>{{ header.links.name }}</span></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -43,12 +40,12 @@
     </header>
     <!-- header area end -->
     <!-- slider area start -->
-    <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="{{ home.image.url }}">
+    <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="{{ home_list.image.url }}">
         <div class="container">
             <div class="slider-content">
-                <h2 class="txtanim1"><span style="color: red">{{ home.name }}</span> </h2>
+                <h2 class="txtanim1"><span style="color: red">{{ home_list.name }}</span> </h2>
                 <h4 class="txtanim1 delay1">
-                    <span style="color: red">{{ home.job_role }}</span>
+                    <span style="color: red">{{ home_list.job_role }}</span>
                 </h4>
             </div>
         </div>
