@@ -26,7 +26,9 @@
                         <div class="main-menu">
                             <nav class="nav-menu">
                                 <ul id="nav_menu">
-                                    <li class="active"><a data-hover="{{ header.links.data_hover }}" href="{{ header.links.href }}"><span>{{ header.links.name }}</span></a></li>
+                                    {% for link in header %}
+                                      <li class="active"><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a></li>
+                                    {% endfor %}
                                 </ul>
                             </nav>
                         </div>
