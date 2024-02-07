@@ -15,36 +15,34 @@
   <!-- prealoader area end -->
   <!-- header area start -->
   <header>
-    <div class="header-area">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-3 col-sm-12">
-            <div class="logo">
-              {% for header in headers %}
+    {% for header in headers %}
+      <div class="header-area">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-3 col-sm-12">
+              <div class="logo">
                 <a href="index.html"><img src="{{ header.icon.url }}" alt="logo"></a>
-              {% endfor %}
+              </div>
             </div>
-          </div>
-          <div class="col-md-9 d-none d-md-block">
-            <div class="main-menu">
-              <nav class="nav-menu">
-                <ul id="nav_menu">
-                  {% for header in headers %}
+            <div class="col-md-9 d-none d-md-block">
+              <div class="main-menu">
+                <nav class="nav-menu">
+                  <ul id="nav_menu">
                     {% for link in header.links.all %}
                       <li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a>
                       </li>
                     {% endfor %}
-                  {% endfor %}
-                </ul>
-              </nav>
+                  </ul>
+                </nav>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-12 d-block d-md-none">
-            <div class="responsive-menu-wrap"></div>
+            <div class="col-sm-12 d-block d-md-none">
+              <div class="responsive-menu-wrap"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {% endfor %}
   </header>
   <!-- header area end -->
   <!-- slider area start -->
