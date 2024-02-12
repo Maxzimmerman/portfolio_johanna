@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Home, Header, HeaderLinks, SocialIcons, AboutUs, Service
+from .models import (Home, Header, HeaderLinks, SocialIcons,
+                     AboutUs, Service, Contact, Form,
+                     SocialIconsContact, Footer)
 
 # Register your models here.
 
@@ -9,3 +11,7 @@ admin.site.register(Header)
 admin.site.register(Service)
 admin.site.register(AboutUs)
 admin.site.register(SocialIcons)
+admin.site.register(Contact)
+admin.site.register(Form)
+admin.site.register(SocialIconsContact)
+admin.site.register(Footer)

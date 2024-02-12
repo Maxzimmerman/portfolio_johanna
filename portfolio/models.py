@@ -58,3 +58,51 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Contact(models.Model):
+    title = models.CharField("Title", max_length=30, default="Konkaktieren Sie mich")
+    address = models.CharField("Adresse", max_length=50)
+    email = models.CharField("Email", max_length=40)
+    phone = models.CharField("Telefonnummer", max_length=30)
+
+    def __str__(self):
+        return "Kontaktformular"
+
+
+class Form(models.Model):
+    title = models.CharField("Form Titel", max_length=40)
+    button_text = models.CharField("Form Button", max_length=30)
+    name_type = models.CharField("Feld Typ", max_length=30)
+    name_name = models.CharField("Feld Name", max_length=30)
+    name_id = models.CharField("Feld Id", max_length=30)
+    name_placeholder = models.CharField("Feld Placeholder", max_length=40)
+    email_type = models.CharField("Feld Typ", max_length=30)
+    email_name = models.CharField("Feld Name", max_length=30)
+    email_fiel_id = models.CharField("Feld Id", max_length=30)
+    email_placeholder = models.CharField("Feld Placeholder", max_length=40)
+    message_name = models.CharField("Feld Name", max_length=30)
+    message_fiel_id = models.CharField("Feld Id", max_length=30)
+    message_placeholder = models.CharField("Feld Placeholder", max_length=40)
+    contact = models.ForeignKey("Contact", related_name="forms", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name_name
+
+
+class SocialIconsContact(models.Model):
+    name = models.CharField("Name", max_length=20)
+    class_name = models.CharField("Klassenname", max_length=30)
+    href = models.TextField("Link")
+    contact = models.ForeignKey("Contact", related_name="icons", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Footer(models.Model):
+    icon = models.ImageField(upload_to='footer/')
+    copy_right = models.CharField("Copyright", max_length=30)
+
+    def __str__(self):
+        return f"Copryright: {self.copy_right}"

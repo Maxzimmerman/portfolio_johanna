@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import Home, Header, HeaderLinks, Service, AboutUs, SocialIcons
+from .models import (Home, Header, HeaderLinks,
+                     Service, AboutUs, SocialIcons,
+                     Contact, Footer)
 from django.views.generic import ListView, DetailView
 
 
@@ -14,12 +16,17 @@ class HomeView(View):
         headers = Header.objects.prefetch_related('links')
         services = Service.objects.all()
         abouts = AboutUs.objects.prefetch_related('icons')
+        contact = Contact.objects.prefetch_related('icons', 'forms')
+        footer = Footer.objects.first()
 
         context = {"home": home,
                    "headers": headers,
                    "services": services,
-                   "about_list": abouts
+                   "about_list": abouts,
+                   "contacts": contact,
+                   "footer": footer
                    }
+
         result = Service.objects.get(pk=1)
         print(result)
 
