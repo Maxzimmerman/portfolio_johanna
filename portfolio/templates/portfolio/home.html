@@ -21,7 +21,7 @@
           <div class="row align-items-center">
             <div class="col-md-3 col-sm-12">
               <div class="logo">
-                <a href="index.html"><img src="{{ header.icon.url }}" alt="logo"></a>
+                <a href="{% url 'home' %}"><img src="{{ header.icon.url }}" alt="logo"></a>
               </div>
             </div>
             <div class="col-md-9 d-none d-md-block">
@@ -93,16 +93,20 @@
     <div class="container">
       <div class="row">
         {% for service in services %}
+
           <div class="col-md-4">
-            <div class="single-service txt2_is_show">
-              <img src="{{ service.image.url }}">
-              <div class="icon"><span class="flaticon-web-design"></span></div>
-              <div class="srvc-content">
-                <h4>{{ service.title }}</h4>
-                <p> {{ service.text }}</p>
+            <a href="{% url 'service-detail' pk=service.pk %}">
+              <div class="single-service txt2_is_show">
+                <img src="{{ service.image.url }}">
+                <div class="icon"><span class="flaticon-web-design"></span></div>
+                <div class="srvc-content">
+                  <h4>{{ service.title }}</h4>
+                  <p> {{ service.text }}</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
+
         {% endfor %}
       </div>
     </div>

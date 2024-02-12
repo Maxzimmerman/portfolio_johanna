@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 
 # Create your models here.
@@ -51,6 +52,9 @@ class Service(models.Model):
     title = models.CharField("Titel", max_length=30)
     text = models.TextField("Text")
     more_information = models.TextField("Mehr Informationen")
+
+    def get_absolute_url(self):
+        return reverse("service_detail", args=[self.pk])
 
     def __str__(self):
         return self.title

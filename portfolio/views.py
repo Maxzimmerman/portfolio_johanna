@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .models import Home, Header, HeaderLinks, Service, AboutUs, SocialIcons
 from django.views.generic import ListView, DetailView
@@ -20,5 +20,17 @@ class HomeView(View):
                    "services": services,
                    "about_list": abouts
                    }
+        result = Service.objects.get(pk=1)
+        print(result)
 
         return render(request, self.template_name, context)
+
+
+class ServiceDetailView(DetailView):
+    template_name = 'portfolio/service-detail.html'
+    model = Service
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['service'] = self.object.service.get(pk=self.kwargs['pk'])
+        return context
