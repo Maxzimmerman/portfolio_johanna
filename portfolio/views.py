@@ -39,5 +39,7 @@ class ServiceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['service'] = self.object.service.get(pk=self.kwargs['pk'])
+        context['service'] = self.model.objects.get(pk=self.kwargs['pk'])
+        context['headers'] = Header.objects.prefetch_related('links')
+        context['footer'] = Footer.objects.first()
         return context
