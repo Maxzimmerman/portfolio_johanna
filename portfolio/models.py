@@ -52,9 +52,10 @@ class Service(models.Model):
     title = models.CharField("Titel", max_length=30)
     text = models.TextField("Text")
     more_information = models.TextField("Mehr Informationen")
+    slug = models.SlugField("Slug", default=f"{title}")
 
     def get_absolute_url(self):
-        return reverse("service_detail", args=[self.pk])
+        return reverse("service_detail", args=[self.slug])
 
     def __str__(self):
         return self.title
