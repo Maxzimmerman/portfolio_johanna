@@ -46,7 +46,6 @@
               <p class="txt1-wrap"><span class="txt1">{{ about.text }}</span>
               </p>
               <div class="social-link">
-                <h5>Share :</h5>
                 {% for icon in about.icons.all %}
                   <a href="{{ icon.href }}"><i class="fa fa-{{ icon.class_name }}"></i></a>
                 {% endfor %}
@@ -159,7 +158,6 @@
                 <li>{{ contact.phone }}</li>
               </ul>
               <div class="social-link">
-                <h5>Share :</h5>
                 {% for icon in contact.icons.all %}
                   <a href="{{ icon.href }}"><i class="fa fa-{{ icon.class_name }}"></i></a>
                 {% endfor %}
