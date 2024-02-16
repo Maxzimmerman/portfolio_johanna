@@ -8,10 +8,10 @@
     Version: 1.0
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-  
+
     1. Header Area
     2. Slider Area
     3. About Area
@@ -444,9 +444,9 @@
     -o-transition: all 0.8s ease 0s;
     transition: all 0.8s ease 0s;
 }
-.txt2_is_show.is_show:before{
-    height: calc(100% - 40px);
-}
+/*.txt2_is_show.is_show:before{*/
+/*    height: calc(100% - 40px);*/
+/*}*/
 .single-service:after{
     content: '';
     position: absolute;
