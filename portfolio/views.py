@@ -28,9 +28,6 @@ class HomeView(View):
                        "footer": footer
                        }
 
-            result = Service.objects.get(pk=1)
-            print(result)
-
             return render(request, self.template_name, context)
         except:
             return render(request, self.template_name)
