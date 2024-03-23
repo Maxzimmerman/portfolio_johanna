@@ -12,25 +12,28 @@ class HomeView(View):
     template_name = 'portfolio/home.html'
 
     def get(self, request):
-        home = Home.objects.first()
-        headers = Header.objects.prefetch_related('links')
-        services = Service.objects.all()
-        abouts = AboutUs.objects.prefetch_related('icons')
-        contact = Contact.objects.prefetch_related('icons', 'forms')
-        footer = Footer.objects.first()
+        try:
+            home = Home.objects.first()
+            headers = Header.objects.prefetch_related('links')
+            services = Service.objects.all()
+            abouts = AboutUs.objects.prefetch_related('icons')
+            contact = Contact.objects.prefetch_related('icons', 'forms')
+            footer = Footer.objects.first()
 
-        context = {"home": home,
-                   "headers": headers,
-                   "services": services,
-                   "about_list": abouts,
-                   "contacts": contact,
-                   "footer": footer
-                   }
+            context = {"home": home,
+                       "headers": headers,
+                       "services": services,
+                       "about_list": abouts,
+                       "contacts": contact,
+                       "footer": footer
+                       }
 
-        result = Service.objects.get(pk=1)
-        print(result)
+            result = Service.objects.get(pk=1)
+            print(result)
 
-        return render(request, self.template_name, context)
+            return render(request, self.template_name, context)
+        except:
+            return render(request, self.template_name)
 
 
 class ServiceDetailView(DetailView):
