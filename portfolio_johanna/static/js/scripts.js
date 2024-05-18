@@ -178,10 +178,9 @@
         }
     }
     bgParallax();
-    $(window).on("scroll", function() {
+    $(document).ready(function() {
         bgParallax();
     });
-
 
     /*================================
     9. Magnific Popup
