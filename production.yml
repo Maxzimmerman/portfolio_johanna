@@ -35,10 +35,9 @@ services:
       - traefik.http.routers.django-johanna.rule=Host(`johanna-zimmermann.com`)
       - traefik.http.routers.django-johanna.tls=true
       - traefik.http.routers.django-johanna.tls.certresolver=le-resolver
-      - traefik.services.django-johanna.loadbalancer.server.port=5002
+      - traefik.services.django-johanna.loadbalancer.server.port=5000
       - traefik.http.middlewares.csrf.headers.hostsproxyheaders='X-CSRFToken'
-    ports:
-      - 5002:5000
+      - traefik.http.routers.django-johanna.middlewares=csrf
 
   postgres:
     build:
@@ -76,9 +75,9 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.services.nginx-johanna.loadbalancer.server.port=5003
+      - traefik.services.nginx-johanna.loadbalancer.server.port=80
       - traefik.http.routers.nginx-johanna.rule='Host(`johanna-zimmermann.com`) && PathPrefix(`/media/`)'
       - traefik.http.routers.nginx-johanna.tls=true
       - traefik.http.routers.nginx-johanna.tls.certresolver=le-resolver
-    ports:
-      - 5003:80
+      - traefik.http.routers.nginx-johanna.middlewares=csrf
+
