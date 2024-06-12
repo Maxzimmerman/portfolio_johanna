@@ -76,9 +76,9 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.services.django-johanna.loadbalancer.server.port=5003
-      - traefik.http.routers.django-johanna.rule='Host(`johanna-zimmermann.com`) && PathPrefix(`/media/`)'
-      - traefik.http.routers.django-johanna.tls=true
-      - traefik.http.routers.django-johanna.tls.certresolver=le-resolver
+      - traefik.services.nginx-johanna.loadbalancer.server.port=5003
+      - traefik.http.routers.nginx-johanna.rule='Host(`johanna-zimmermann.com`) && PathPrefix(`/media/`)'
+      - traefik.http.routers.nginx-johanna.tls=true
+      - traefik.http.routers.nginx-johanna.tls.certresolver=le-resolver
     ports:
       - 5003:80
