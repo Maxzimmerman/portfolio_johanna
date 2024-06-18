@@ -32,7 +32,7 @@ services:
       - web
       - django-johanna
     labels:
-      - "traefik.http.routers.nginx-johanna.rule=Host(`johanna-zimmermann.com`)"
+      - "traefik.http.routers.django-johanna.rule=Host(`johanna-zimmermann.com`)"
       - traefik.http.routers.django-johanna.tls=true
       - traefik.http.routers.django-johanna.tls.certresolver=le-resolver
       - traefik.http.services.django-johanna.loadbalancer.server.port=5000
