@@ -38,6 +38,7 @@ services:
       - traefik.services.django-johanna.loadbalancer.server.port=5000
       - traefik.http.middlewares.csrf.headers.hostsproxyheaders='X-CSRFToken'
       - traefik.http.routers.django-johanna.middlewares=csrf
+      - traefik.http.routers.django-johanna.entrypoints=websecure
 
   postgres:
     build:
@@ -80,4 +81,5 @@ services:
       - traefik.http.routers.nginx-johanna.tls=true
       - traefik.http.routers.nginx-johanna.tls.certresolver=le-resolver
       - traefik.http.routers.nginx-johanna.middlewares=csrf
+      - traefik.http.routers.nginx-johanna.entrypoints=websecure
 
