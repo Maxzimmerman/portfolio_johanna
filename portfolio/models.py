@@ -107,3 +107,8 @@ class Footer(models.Model):
 
     def __str__(self):
         return f"Copryright: {self.copy_right}"
+
+
+class TextSection(models.Model):
+    header = models.CharField("Überschrift", max_length=40)
+    text = models.TextField("Text")

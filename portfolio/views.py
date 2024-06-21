@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
-                     Contact, Footer)
+                     Contact, Footer, TextSection)
 from django.views.generic import ListView, DetailView
 
 
@@ -18,6 +18,7 @@ class HomeView(View):
             services = Service.objects.all()
             abouts = AboutUs.objects.prefetch_related('icons')
             contact = Contact.objects.prefetch_related('icons', 'forms')
+            text = TextSection.objects.first()
             footer = Footer.objects.first()
 
             context = {"home": home,
@@ -25,7 +26,8 @@ class HomeView(View):
                        "services": services,
                        "about_list": abouts,
                        "contacts": contact,
-                       "footer": footer
+                       "footer": footer,
+                       "text": text,
                        }
 
             return render(request, self.template_name, context)

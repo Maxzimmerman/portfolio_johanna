@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (Home, Header, HeaderLinks, SocialIcons,
                      AboutUs, Service, Contact, Form,
-                     SocialIconsContact, Footer)
+                     SocialIconsContact, Footer, TextSection)
 
 # Register your models here.
 
@@ -15,3 +15,4 @@ admin.site.register(Contact)
 admin.site.register(Form)
 admin.site.register(SocialIconsContact)
 admin.site.register(Footer)
+admin.site.register(TextSection)
