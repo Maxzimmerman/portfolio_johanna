@@ -30,9 +30,11 @@
           </div>
         </div>
       </div>
-      <div class="go-to-top">
-        <a href="#top"><i class="fa fa-angle-up"></i></a>
-      </div>
+      {% if current_page == "home" %}
+        <div class="go-to-top">
+          <a href="#top"><i class="fa fa-angle-up"></i></a>
+        </div>
+      {% endif %}
     </div>
   </div>
 </footer>

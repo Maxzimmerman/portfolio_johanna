@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404
 from django.views import View
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
@@ -28,6 +28,7 @@ class HomeView(View):
                        "contacts": contact,
                        "footer": footer,
                        "text": text,
+                       "current_page": "home",
                        }
 
             return render(request, self.template_name, context)
@@ -44,4 +45,5 @@ class ServiceDetailView(DetailView):
         context['service'] = self.model.objects.get(slug=self.kwargs['slug'])
         context['headers'] = Header.objects.prefetch_related('links')
         context['footer'] = Footer.objects.first()
+        context['current_page'] = "detail"
         return context
