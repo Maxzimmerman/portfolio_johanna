@@ -2,7 +2,8 @@ from django.shortcuts import render, reverse, get_object_or_404
 from django.views import View
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
-                     Contact, Footer, TextSection)
+                     Contact, Footer, TextSection,
+                     Imprint)
 from django.views.generic import ListView, DetailView
 from .forms import ContactForm
 
@@ -55,17 +56,14 @@ class ServiceDetailView(DetailView):
 class Impressum(View):
     def get(self, request, *args, **kwargs):
         try:
-            home = Home.objects.first()
             headers = Header.objects.prefetch_related('links')
-            services = Service.objects.all()
-            abouts = AboutUs.objects.prefetch_related('icons')
-            contact = Contact.objects.prefetch_related('icons', 'forms')
-            text = TextSection.objects.first()
             footer = Footer.objects.first()
+            imprint = Imprint.objects.first()
 
             context = {
                        "headers": headers,
                        "footer": footer,
+                       "imprint": imprint
                        }
 
             return render(request, "portfolio/impressum.html", context)

@@ -112,3 +112,15 @@ class Footer(models.Model):
 class TextSection(models.Model):
     header = models.CharField("Überschrift", max_length=40)
     text = models.TextField("Text")
+
+
+class Imprint(models.Model):
+    company_name = models.CharField("Firmenname", max_length=50)
+    owner_name = models.CharField("Name der Geschäftsführerin", max_length=60)
+    street_name = models.CharField("Straße", max_length=100)
+    house_number = models.CharField("Hausnummer", max_length=10)
+    postel_code = models.CharField("Postleitzahl", max_length=6)
+    city = models.CharField("Stadt", max_length=40, default="Frankfurt")
+    represented_by = models.CharField("Vertreten durch", max_length=60)
+    phone = models.CharField("Telefonnummer", max_length=20)
+    email = models.CharField("E-Mail", max_length=30)
