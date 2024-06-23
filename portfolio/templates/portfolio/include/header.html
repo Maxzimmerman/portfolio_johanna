@@ -9,7 +9,7 @@
 {#    </div>#}
 <!-- prealoader area end -->
 <!-- header area start -->
-<header>
+<header class="detail-page-section">
   {% for header in headers %}
     <div class="header-area">
       <div class="container">
@@ -27,6 +27,8 @@
                     <li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a>
                     </li>
                   {% endfor %}
+                <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a>
+                    </li>
                 </ul>
               </nav>
             </div>

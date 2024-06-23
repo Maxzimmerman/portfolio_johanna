@@ -4,12 +4,14 @@ from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection)
 from django.views.generic import ListView, DetailView
+from .forms import ContactForm
 
 
 # Create your views here.
 
 class HomeView(View):
     template_name = 'portfolio/home.html'
+    form_class = ContactForm
 
     def get(self, request):
         try:
@@ -29,6 +31,7 @@ class HomeView(View):
                        "footer": footer,
                        "text": text,
                        "current_page": "home",
+                       "contact_form": self.form_class()
                        }
 
             return render(request, self.template_name, context)
@@ -47,3 +50,24 @@ class ServiceDetailView(DetailView):
         context['footer'] = Footer.objects.first()
         context['current_page'] = "detail"
         return context
+
+
+class Impressum(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            home = Home.objects.first()
+            headers = Header.objects.prefetch_related('links')
+            services = Service.objects.all()
+            abouts = AboutUs.objects.prefetch_related('icons')
+            contact = Contact.objects.prefetch_related('icons', 'forms')
+            text = TextSection.objects.first()
+            footer = Footer.objects.first()
+
+            context = {
+                       "headers": headers,
+                       "footer": footer,
+                       }
+
+            return render(request, "portfolio/impressum.html", context)
+        except:
+            return render(request, "portfolio/impressum.html")
