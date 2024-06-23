@@ -709,6 +709,19 @@
   bottom: 0px;
 }
 
+.detail-page-holder {
+  height: 85vh;
+  padding-top: 170px;
+}
+
+.detail-page-footer {
+  height: 15vh;
+}
+
+html {
+  height: 100%;
+}
+
 /*============================================
 * END Footer Area
 *=============================================*/
