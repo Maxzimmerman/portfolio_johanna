@@ -1,11 +1,12 @@
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views import View
+from django.views.generic import ListView, DetailView
+from .forms import ContactForm
+from django.http import FileResponse, Http404
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection,
                      Imprint)
-from django.views.generic import ListView, DetailView
-from .forms import ContactForm
 
 
 # Create your views here.
@@ -49,7 +50,7 @@ class ServiceDetailView(DetailView):
         context['service'] = self.model.objects.get(slug=self.kwargs['slug'])
         context['headers'] = Header.objects.prefetch_related('links')
         context['footer'] = Footer.objects.first()
-        context['current_page'] = "detail"
+        context['current_page'] = "other"
         return context
 
 
@@ -61,11 +62,20 @@ class Impressum(View):
             imprint = Imprint.objects.first()
 
             context = {
-                       "headers": headers,
-                       "footer": footer,
-                       "imprint": imprint
-                       }
+                "headers": headers,
+                "footer": footer,
+                "imprint": imprint,
+                "current_page": "other"
+            }
 
             return render(request, "portfolio/impressum.html", context)
         except:
             return render(request, "portfolio/impressum.html")
+
+
+class DataProtection(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            return FileResponse(open('portfolio_johanna/media/data-protection/datenschutzerklarung.pdf', 'rb'), content_type='application/pdf')
+        except FileNotFoundError:
+            raise Http404()

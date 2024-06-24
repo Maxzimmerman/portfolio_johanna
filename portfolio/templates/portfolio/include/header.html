@@ -17,11 +17,13 @@
               <nav class="nav-menu">
                 <ul id="nav_menu">
                   {% for link in header.links.all %}
-                    <li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a>
-                    </li>
+                    {% if current_page == "home" %}<li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a></li>{% endif %}
                   {% endfor %}
-                <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a>
-                    </li>
+                  {% if current_page == "other" %}
+                    <li><a data-hover="Home" href="{% url 'home' %}"><span>Home</span></a></li>
+                  {% endif %}
+                <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a></li>
+                <li><a data-hover="Datenschutzerklärung" href="{% url 'data-protection' %}"><span>Datenschutzerklärung</span></a></li>
                 </ul>
               </nav>
             </div>
