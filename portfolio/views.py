@@ -14,6 +14,7 @@ from .models import (Home, Header, HeaderLinks,
 class HomeView(View):
     template_name = 'portfolio/home.html'
     form_class = ContactForm
+    context = None
 
     def get(self, request):
         try:
@@ -25,20 +26,32 @@ class HomeView(View):
             text = TextSection.objects.first()
             footer = Footer.objects.first()
 
-            context = {"home": home,
-                       "headers": headers,
-                       "services": services,
-                       "about_list": abouts,
-                       "contacts": contact,
-                       "footer": footer,
-                       "text": text,
-                       "current_page": "home",
-                       "contact_form": self.form_class()
-                       }
+            self.context = {"home": home,
+                            "headers": headers,
+                            "services": services,
+                            "about_list": abouts,
+                            "contacts": contact,
+                            "footer": footer,
+                            "text": text,
+                            "current_page": "home",
+                            "form": self.form_class()
+                            }
 
-            return render(request, self.template_name, context)
+            return render(request, self.template_name, self.context)
         except:
             return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            service = form.cleaned_data['service']
+            message = form.cleaned_data['message']
+
+            return render(request, "portfolio/partials/success_email.html")
+        else:
+            return render(request, self.template_name, self.context)
 
 
 class ServiceDetailView(DetailView):
@@ -76,6 +89,7 @@ class Impressum(View):
 class DataProtection(View):
     def get(self, request, *args, **kwargs):
         try:
-            return FileResponse(open('portfolio_johanna/static/images/data-protection/datenschutzerklarung.pdf', 'rb'), content_type='application/pdf')
+            return FileResponse(open('portfolio_johanna/static/images/data-protection/datenschutzerklarung.pdf', 'rb'),
+                                content_type='application/pdf')
         except FileNotFoundError:
             raise Http404()

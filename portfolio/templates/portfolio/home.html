@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
@@ -59,16 +60,16 @@
   {% endfor %}
 
   <section class="textarea mb-5" id="">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="">
-            <div class="abt-content">
-              <h5>{{ text.header|linebreaksbr }}</h5>
-              <p class="txt1-wrap"><span class="txt1">{{ text.text|linebreaksbr }} </span></p>
-            </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="">
+          <div class="abt-content">
+            <h5>{{ text.header|linebreaksbr }}</h5>
+            <p class="txt1-wrap"><span class="txt1">{{ text.text|linebreaksbr }} </span></p>
           </div>
         </div>
       </div>
+    </div>
   </section>
 
   <!-- about area end -->
@@ -79,7 +80,7 @@
         {% for service in services %}
 
           <div class="col-md-4">
-            <a href="{% url 'service-detail' slug=service.slug%}">
+            <a href="{% url 'service-detail' slug=service.slug %}">
               <div class="single-service txt2_is_show">
                 <img src="{{ service.image.url }}">
                 <div class="srvc-content">
@@ -179,27 +180,31 @@
             </div>
           </div>
           <div class="col-md-7">
-            {% for form in contact.forms.all %}
-              <div class="contact-form">
-                <div class="screen-reader-response"></div>
-                <form action="{% static 'php/mail.php' %}" id="cf">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="{{ form.name_type }}" id="{{ form.name_id }}" name="{{ form.name_name }}" placeholder="{{ form.name_placeholder}}">
-                    </div>
-                    <div class="col-md-6">
-                      <input type="{{ form.email_type }}" id="{{ form.email_field_id }}" name="{{ form.email_name }}" placeholder="{{ form.email_placeholder}}">
-                    </div>
+            <div class="contact-form">
+              <div class="screen-reader-response"></div>
+              <form method="post" action="{% url 'home' %}" id="cf">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-6">
+                    {{ form.name }}
                   </div>
-                  <textarea name="{{ form.message_name }}" id="{{ form.message_field_id }}" placeholder="{{ form.message_placeholder }}"></textarea>
-                  <div class="form-submit">
-                    <button type="submit" name="submit" id="cnt_submit">{{ form.button_text }}<i
-                      class="fa fa-long-arrow-right"></i>
-                    </button>
+                  <div class="col-md-6">
+                    {{ form.email }}
                   </div>
-                </form>
-              </div>
-            {% endfor %}
+                </div>
+                 <div class="row">
+                  <div class="col-md-12">
+                    {{ form.service }}
+                  </div>
+                </div>
+                {{ form.message }}
+                <div class="form-submit">
+                  <button type="submit" name="submit" id="cnt_submit">Submit<i
+                    class="fa fa-long-arrow-right"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
