@@ -76,6 +76,6 @@ class Impressum(View):
 class DataProtection(View):
     def get(self, request, *args, **kwargs):
         try:
-            return FileResponse(open('portfolio_johanna/media/data-protection/datenschutzerklarung.pdf', 'rb'), content_type='application/pdf')
+            return FileResponse(open('portfolio_johanna/static/images/data-protection/datenschutzerklarung.pdf', 'rb'), content_type='application/pdf')
         except FileNotFoundError:
             raise Http404()
