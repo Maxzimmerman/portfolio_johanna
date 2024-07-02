@@ -1,11 +1,10 @@
-<body id="top">
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
-  href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+{% include "base.html" %}
 
+<body id="top">
 <header class="detail-page-section">
-  {% for header in headers %}
-    <div class="header-area">
-      <div class="container">
+  <div class="header-area">
+    <div class="container">
+      {% for header in headers %}
         <div class="row align-items-center">
           <div class="col-md-3 col-sm-12">
             <div class="logo">
@@ -17,13 +16,16 @@
               <nav class="nav-menu">
                 <ul id="nav_menu">
                   {% for link in header.links.all %}
-                    {% if current_page == "home" %}<li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a></li>{% endif %}
+                    {% if current_page == "home" %}
+                      <li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a>
+                      </li>{% endif %}
                   {% endfor %}
                   {% if current_page == "other" %}
                     <li><a data-hover="Home" href="{% url 'home' %}"><span>Home</span></a></li>
                   {% endif %}
-                <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a></li>
-                <li><a data-hover="Datenschutzerklärung" href="{% url 'data-protection' %}"><span>Datenschutzerklärung</span></a></li>
+                  <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a></li>
+                  <li><a data-hover="Datenschutzerklärung"
+                         href="{% url 'data-protection' %}"><span>Datenschutzerklärung</span></a></li>
                 </ul>
               </nav>
             </div>
@@ -32,20 +34,10 @@
             <div class="responsive-menu-wrap"></div>
           </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-  {% endfor %}
+  </div>
 </header>
-<!-- header area end -->
-<!-- slider area start -->
-<!-- slider area end -->
-<!-- about area strat -->
-<!-- about area end -->
-<!-- service area start -->
-<!-- contact area start -->
-<!-- contact area end -->
-<!-- footer area start -->
-<!-- footer area end -->
 </body>
 
 
