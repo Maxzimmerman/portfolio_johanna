@@ -5,20 +5,10 @@
 
 {% block content %}
   <body id="top">
-  <!--[if lt IE 8]>
-  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
-    href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <!-- preloader area start -->
-  {#    <div id="preloader">#}
-  {#        <div class="loader_line"></div>#}
-  {#    </div>#}
-  <!-- prealoader area end -->
-  <!-- header area start -->
   {% include 'portfolio/include/header.html' %}
   <!-- header area end -->
   <!-- slider area start -->
-  <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="{{ home.image.url }}">
+  <section id="home" class="slider-area parallax" data-bg-image="{{ home.image.url }}">
     <div class="container">
       <div class="slider-content">
         <h2 class="txtanim1"><span>{{ home.name }}</span></h2>
@@ -44,7 +34,7 @@
               <div class="section-title">
                 <h2 class="txt2_is_show">{{ about.title }}</h2>
               </div>
-              <p class="txt1-wrap"><span class="txt1">{{ about.text|linebreaksbr }}</span>
+              <p class="txt1-wrap"><span class="">{{ about.text|linebreaksbr }}</span>
               </p>
               <div class="social-link">
                 {% for icon in about.icons.all %}
@@ -65,7 +55,7 @@
         <div class="">
           <div class="abt-content">
             <h5>{{ text.header|linebreaksbr }}</h5>
-            <p class="txt1-wrap"><span class="txt1">{{ text.text|linebreaksbr }} </span></p>
+            <p class="txt1-wrap"><span class="">{{ text.text|linebreaksbr }} </span></p>
           </div>
         </div>
       </div>
@@ -102,60 +92,6 @@
   </div>
 
   <!-- service area end -->
-  {#    <!-- portfolio area start -->#}
-  {#    <section class="fortfolio-area bg-gray pt--100 pb--200" id="portfolio">#}
-  {#        <div class="container">#}
-  {#            <div class="section-title">#}
-  {#                <h2 class="txt2_is_show">Our Portfolio</h2>#}
-  {#            </div>#}
-  {#            <div class="fortfolio-filter">#}
-  {#                <button class="active" data-filter="*">All</button>#}
-  {#                <button data-filter=".web">Web Design</button>#}
-  {#                <button data-filter=".design">Graphics Design</button>#}
-  {#                <button data-filter=".marketing">Marketing</button>#}
-  {#            </div>#}
-  {#            <div class="portfolio-masonary row" id="container">#}
-  {#                <div class="prt-grid marketing design col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-video" href="https://www.youtube.com/watch?v=eDiA1p5DlLg">#}
-  {#                            <span class="flaticon-play-button"></span>#}
-  {#                            <img src="{% static 'images/portfolio/img1.jpg' %}" alt="image">#}
-  {#                        </a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#                <div class="prt-grid marketing web col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-img" href="{% static 'images/portfolio/img2.jpg' %}"><img src="{% static 'images/portfolio/img2.jpg' %}" alt="image"></a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#                <div class="prt-grid col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-img" href="{% static 'images/portfolio/img3.jpg' %}"><img src="{% static 'images/portfolio/img3.jpg' %}" alt="image"></a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#                <div class="prt-grid design marketing col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-img" href="{% static 'images/portfolio/img4.jpg' %}"><img src="{% static 'images/portfolio/img4.jpg' %}" alt="image"></a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#                <div class="prt-grid web design col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-img" href="{% static 'images/portfolio/img5.jpg' %}"><img src="{% static 'images/portfolio/img5.jpg' %}" alt="image"></a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#                <div class="prt-grid design marketing col-md-4 col-sm-6">#}
-  {#                    <div class="prt-item">#}
-  {#                        <a class="expand-img" href="{% static 'images/portfolio/img6.jpg' %}"><img src="{% static 'images/portfolio/img6.jpg' %}" alt="image"></a>#}
-  {#                    </div>#}
-  {#                </div>#}
-  {#            </div>#}
-  {#        </div>#}
-  {#        <div class="white_svg svg_white">#}
-  {#            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">#}
-  {#                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />#}
-  {#            </svg>#}
-  {#        </div>#}
-  {#    </section>#}
   <!-- portfolio area end -->
   <!-- contact area start -->
   {% for contact in contacts %}
@@ -180,9 +116,11 @@
             </div>
           </div>
           <div class="col-md-7">
-            <div class="contact-form">
+            <div class="contact-form" id="contact-form">
               <div class="screen-reader-response"></div>
-              <form method="post" action="{% url 'home' %}" id="cf">
+              <form hx-post="{% url 'home' %}"
+                    hx-target="#contact-form"
+                    id="cf">
                 {% csrf_token %}
                 <div class="row">
                   <div class="col-md-6">
@@ -217,6 +155,3 @@
   </body>
 
 {% endblock %}
-
-
-
