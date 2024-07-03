@@ -218,6 +218,7 @@ EMAIL_BACKEND = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
+CONTACT_EMAIL_ADDRESS = "max@max-zimmermann.online"
 
 
 # ADMIN

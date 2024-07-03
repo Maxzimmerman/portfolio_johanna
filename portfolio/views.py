@@ -2,7 +2,9 @@ from django.shortcuts import render, reverse, get_object_or_404
 from django.views import View
 from django.views.generic import ListView, DetailView
 from .forms import ContactForm
+from django.conf import settings
 from django.http import FileResponse, Http404
+from django.core.mail import EmailMessage
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection,
@@ -44,10 +46,24 @@ class HomeView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            service = form.cleaned_data['service']
-            message = form.cleaned_data['message']
+            cleaned_name = form.cleaned_data['name']
+            cleaned_email = form.cleaned_data['email']
+            cleaned_service = form.cleaned_data['service']
+            cleaned_message = form.cleaned_data['message']
+
+            message = (f"Email von {cleaned_name} ({cleaned_email})"
+                       f"\n\nAnliegen:{cleaned_service}"
+                       f"\n\n\nNachricht: {cleaned_message}")
+
+            email = EmailMessage(
+                "Email von der Website",
+                message,
+                to=[settings.CONTACT_EMAIL_ADDRESS],
+                from_email="kfnfmax@gmail.com"
+            )
+
+            print(email)
+            email.send()
 
             return render(request, "portfolio/partials/success_email.html")
         else:
