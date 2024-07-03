@@ -795,10 +795,12 @@
   position: fixed;
   width: 100%;
   bottom: 0px;
+  margin-top: 200px;
 }
 
 .detail-page-holder {
-  padding-top: 10px;
+  padding-top: 100px;
+  margin-bottom: 230px;
 }
 
 @media screen and (min-width: 1000px) {
@@ -807,12 +809,12 @@
   }
 }
 
-.detail-page-footer {
-  height: 15vh;
-}
-
 html {
   height: 100%;
+}
+
+h2 {
+  word-break: break-word;
 }
 
 /*============================================
