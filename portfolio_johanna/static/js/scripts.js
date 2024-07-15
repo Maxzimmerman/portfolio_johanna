@@ -203,9 +203,8 @@
     /*================================
     10. slicknav Mobile Menu
     ==================================*/
-    $('ul#nav_menu').slicknav({
-        prependTo: ".responsive-menu-wrap"
-    });
+
+    // Ligic outsorced as inline js in header.html
 
 
     /*================================

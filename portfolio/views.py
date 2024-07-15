@@ -109,3 +109,19 @@ class DataProtection(View):
                                 content_type='application/pdf')
         except FileNotFoundError:
             raise Http404()
+
+
+class Certificates(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            headers = Header.objects.prefetch_related('links')
+            footer = Footer.objects.first()
+
+            context = {
+                "headers": headers,
+                "footer": footer,
+                "current_page": "other"
+            }
+            return render(request, 'portfolio/certificates.html', context)
+        except:
+            return render(request, 'portfolio/certificates.html')

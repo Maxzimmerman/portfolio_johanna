@@ -25,6 +25,8 @@
                   <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a></li>
                   <li><a data-hover="Datenschutzerklärung"
                          href="{% url 'data-protection' %}"><span>Datenschutzerklärung</span></a></li>
+                  <li><a data-hover="Zertifikate"
+                         href="{% url 'certificates' %}"><span>Zertifikate</span></a></li>
                 </ul>
               </nav>
             </div>
@@ -36,6 +38,11 @@
       {% endfor %}
     </div>
   </div>
+  <script>
+    $('ul#nav_menu').slicknav({
+      prependTo: ".responsive-menu-wrap"
+    });
+  </script>
 </header>
 
 
