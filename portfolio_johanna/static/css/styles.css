@@ -793,8 +793,9 @@
 
 .service-detail-footer {
   width: 100%;
-  bottom: 0px;
-  margin-top: 200px;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .detail-page-holder {
