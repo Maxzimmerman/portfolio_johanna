@@ -5,12 +5,12 @@
     <div class="container">
       {% for header in headers %}
         <div class="row align-items-center">
-          <div class="col-md-3 col-sm-12">
+          <div class="col-md-3 col-sm-12 header-logo-holder">
             <div class="logo">
               <a href="{% url 'home' %}"><img src="{{ header.icon.url }}" alt="logo"></a>
             </div>
           </div>
-          <div class="col-md-9 d-none d-md-block">
+          <div class="col-md-9 d-none d-md-block header-links-holder">
             <div class="main-menu">
               <nav class="nav-menu">
                 <ul id="nav_menu">

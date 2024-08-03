@@ -799,6 +799,26 @@
   bottom: 0;
 }
 
+@media screen and (min-width: 800px) {
+  .service-detail-footer {
+    position: fixed;
+  }
+
+  .header-logo-holder {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 10%;
+    max-width: 20%;
+  }
+
+  .header-links-holder {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 80%;
+    max-width: 80%;
+  }
+}
+
 .detail-page-holder {
   padding-top: 100px;
   margin-bottom: 230px;
@@ -807,6 +827,12 @@
 @media screen and (min-width: 1000px) {
   .detail-page-holder {
     padding-top: 120px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .detail-page-holder {
+    padding-top: 155px;
   }
 }
 
