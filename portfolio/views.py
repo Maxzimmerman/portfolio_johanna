@@ -9,6 +9,9 @@ from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection,
                      Imprint)
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -44,30 +47,33 @@ class HomeView(View):
             return render(request, self.template_name)
 
     def post(self, request, *args, **kwargs):
+        logger.info("Reading Form")
         form = self.form_class(request.POST)
+        logger.info("Processing form.")
         if form.is_valid():
+            logger.info("Creating Email.")
             cleaned_name = form.cleaned_data['name']
             cleaned_email = form.cleaned_data['email']
             cleaned_service = form.cleaned_data['service']
             cleaned_message = form.cleaned_data['message']
 
             message = (f"Email von {cleaned_name} ({cleaned_email})"
-                       f"\n\nAnliegen:{cleaned_service}"
+                       f"\n\nAnliegen: {cleaned_service}"
                        f"\n\n\nNachricht: {cleaned_message}")
 
             email = EmailMessage(
                 "Email von der Website",
                 message,
-                to=[settings.CONTACT_EMAIL_ADDRESS],
-                from_email="kfnfmax@gmail.com"
+                to=["frettchen.95@icloud.com"],
+                from_email=settings.FROM_EMAIL
             )
-
-            print(email)
+            logger.info("sending mail")
             email.send()
-
+            logger.info("mail sent.")
             return render(request, "portfolio/partials/success_email.html")
         else:
-            return render(request, self.template_name, self.context)
+            logger.warning("form not valid")
+        return render(request, self.template_name, self.context)
 
 
 class ServiceDetailView(DetailView):
