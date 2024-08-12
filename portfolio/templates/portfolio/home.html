@@ -122,30 +122,30 @@
                 <p>Der Mail Service ist zur Zeit in Wartungsarbeiten. Bitte senden Sie in der zwischen Zeit ihre Mails
                   an diese Adresse: {{ contact.email }}</p>
               {% endfor %}
-              {#              <form hx-post="{% url 'home' %}"#}
-              {#                    hx-target="#contact-form"#}
-              {#                    id="cf">#}
-              {#                {% csrf_token %}#}
-              {#                <div class="row">#}
-              {#                  <div class="col-md-6">#}
-              {#                    {{ form.name }}#}
-              {#                  </div>#}
-              {#                  <div class="col-md-6">#}
-              {#                    {{ form.email }}#}
-              {#                  </div>#}
-              {#                </div>#}
-              {#                 <div class="row">#}
-              {#                  <div class="col-md-12">#}
-              {#                    {{ form.service }}#}
-              {#                  </div>#}
-              {#                </div>#}
-              {#                {{ form.message }}#}
-              {#                <div class="form-submit">#}
-              {#                  <button type="submit" name="submit" id="cnt_submit">Submit<i#}
-              {#                    class="fa fa-long-arrow-right"></i>#}
-              {#                  </button>#}
-              {#                </div>#}
-              {#              </form>#}
+              <form hx-post="{% url 'home' %}"
+                    hx-target="#contact-form"
+                    id="cf">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-6">
+                    {{ form.name }}
+                  </div>
+                  <div class="col-md-6">
+                    {{ form.email }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    {{ form.service }}
+                  </div>
+                </div>
+                {{ form.message }}
+                <div class="form-submit">
+                  <button type="submit" name="submit" id="cnt_submit">Submit<i
+                    class="fa fa-long-arrow-right"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
