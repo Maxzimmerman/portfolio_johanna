@@ -219,9 +219,10 @@ FROM_EMAIL = "johanna-zimmermann@johanna-zimmermann.com"
 EMAIL_HOST = "smtp.strato.de"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "johanna-zimmermann@johanna-zimmermann.com"
-EMAIL_HOST_PASSWORD = "F;6c_5WiMJ_3E@w"
+EMAIL_HOST_PASSWORD = env("MAIL_PASSWORD")
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+CONTACT_MAIL = "zimmermannjohanna233@gmail.com"
 
 
 # ADMIN

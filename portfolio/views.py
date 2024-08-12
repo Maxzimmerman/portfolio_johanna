@@ -64,7 +64,7 @@ class HomeView(View):
             email = EmailMessage(
                 "Email von der Website",
                 message,
-                to=["frettchen.95@icloud.com"],
+                to=[settings.CONTACT_MAIL],
                 from_email=settings.FROM_EMAIL
             )
             logger.info("sending mail")
