@@ -118,10 +118,6 @@
           <div class="col-md-7">
             <div class="contact-form" id="contact-form">
               <div class="screen-reader-response"></div>
-              {% for contact in contacts %}
-                <p>Der Mail Service ist zur Zeit in Wartungsarbeiten. Bitte senden Sie in der zwischen Zeit ihre Mails
-                  an diese Adresse: {{ contact.email }}</p>
-              {% endfor %}
               <form hx-post="{% url 'home' %}"
                     hx-target="#contact-form"
                     id="cf">
