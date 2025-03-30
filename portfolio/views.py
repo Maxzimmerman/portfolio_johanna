@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection,
-                     Imprint)
+                     Imprint, PortfolioImage, Portfolio)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,7 @@ class HomeView(View):
             contact = Contact.objects.prefetch_related('icons', 'forms')
             text = TextSection.objects.first()
             footer = Footer.objects.first()
+            portfolio = Portfolio.objects.prefetch_related('images')
 
             self.context = {"home": home,
                             "headers": headers,
@@ -39,7 +40,8 @@ class HomeView(View):
                             "footer": footer,
                             "text": text,
                             "current_page": "home",
-                            "form": self.form_class()
+                            "form": self.form_class(),
+                            "portfolios": portfolio,
                             }
 
             return render(request, self.template_name, self.context)

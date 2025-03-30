@@ -4,6 +4,23 @@ from django.shortcuts import reverse
 
 # Create your models here.
 
+class Portfolio(models.Model):
+    title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.title
+
+
+class PortfolioImage(models.Model):
+    portfolio = models.ForeignKey(
+        Portfolio,
+        on_delete=models.CASCADE,
+        related_name='images')
+    image = models.ImageField("Portfolio Bild", upload_to='portfolio/')
+
+    def __str__(self):
+        return "Portfolio Image"
+
 
 class Home(models.Model):
     image = models.ImageField("Home bild", upload_to='home/')

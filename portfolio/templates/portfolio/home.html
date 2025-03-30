@@ -92,6 +92,34 @@
   </div>
 
   <!-- service area end -->
+  <!-- portfolio area start -->
+  {% if portfolios %}
+    {% for portfolio in portfolios %}
+      <section class="fortfolio-area bg-gray pt--100 pb--200" id="portfolio">
+        <div class="container">
+          <div class="section-title">
+            <h2 class="txt2_is_show">{{ portfolio.title }}</h2>
+          </div>
+          <div class="portfolio-masonary row" id="container">
+            {% for image in portfolio.images.all  %}
+              <div class="prt-grid marketing design col-md-4 col-sm-6">
+                <div class="prt-item">
+                  <a class="expand-video">
+                    <img src="{{ image.image.url }}" alt="image">
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="white_svg svg_white">
+          <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
+            <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 "/>
+          </svg>
+        </div>
+      </section>
+    {% endfor %}
+  {% endif %}
   <!-- portfolio area end -->
   <!-- contact area start -->
   {% for contact in contacts %}

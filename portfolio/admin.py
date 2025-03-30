@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (Home, Header, HeaderLinks, SocialIcons,
                      AboutUs, Service, Contact, Form,
                      SocialIconsContact, Footer, TextSection,
-                     Imprint)
+                     Imprint, PortfolioImage, Portfolio)
 
 # Register your models here.
 
@@ -18,3 +18,5 @@ admin.site.register(SocialIconsContact)
 admin.site.register(Footer)
 admin.site.register(TextSection)
 admin.site.register(Imprint)
+admin.site.register(PortfolioImage)
+admin.site.register(Portfolio)
