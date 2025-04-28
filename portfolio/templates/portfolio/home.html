@@ -164,6 +164,9 @@
                   </div>
                 </div>
                 {{ form.message }}
+                <br>
+                <div class="g-recaptcha" data-sitekey="6Lc_4yYrAAAAALkc1w4JhVPkTpkXmFhjpeuffeZF"></div>
+                <br />
                 <div class="form-submit">
                   <button type="submit" name="submit" id="cnt_submit">Submit<i
                     class="fa fa-long-arrow-right"></i>
@@ -175,6 +178,9 @@
         </div>
       </div>
     </section>
+          <!-- Google reCAPTCHA API -->
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      <!-- Custom Script to prevent submitting without reCAPTCHA -->
   {% endfor %}
   <!-- contact area end -->
   <!-- footer area start -->
