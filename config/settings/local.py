@@ -60,3 +60,4 @@ INSTALLED_APPS += ["django_extensions"]  # noqa: F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+HCAPTCHA_SITEKEY = "075af4d6-f1da-45e4-99f4-07421c5827fa"

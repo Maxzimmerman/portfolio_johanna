@@ -1,5 +1,6 @@
 from django import forms
 from .models import Service
+from hcaptcha.fields import hCaptchaField
 
 
 class ContactForm(forms.Form):
@@ -10,3 +11,4 @@ class ContactForm(forms.Form):
         empty_label="Wähle einen Service",
         widget=forms.Select(attrs={'class': 'form-control'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Nachricht*'}))
+    captcha = hCaptchaField(theme="dark", size="compact")

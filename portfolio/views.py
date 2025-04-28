@@ -75,6 +75,7 @@ class HomeView(View):
             return render(request, "portfolio/partials/success_email.html")
         else:
             logger.warning("form not valid")
+            return render(request, "portfolio/partials/fail_email.html")
         return render(request, self.template_name, self.context)
 
 

@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "hcaptcha"
 ]
 
 LOCAL_APPS = [
@@ -224,7 +225,6 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 CONTACT_MAIL = "zimmermannjohanna233@gmail.com"
 
-
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
@@ -260,7 +260,6 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-
 # django-allauth
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
@@ -282,7 +281,6 @@ ACCOUNT_FORMS = {"signup": "portfolio_johanna.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "portfolio_johanna.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "portfolio_johanna.users.forms.UserSocialSignupForm"}
-
 
 # Your stuff...
 # ------------------------------------------------------------------------------
