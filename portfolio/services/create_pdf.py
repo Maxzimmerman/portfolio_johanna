@@ -9,13 +9,14 @@ from reportlab.pdfgen.canvas import Canvas
 from datetime import datetime
 
 class CreatePdf:
-    def __init__(self, costumer_name, date, table, further_movements, suggestion, legend_data):
+    def __init__(self, costumer_name, date, table, further_movements, suggestion, legend_data, result):
         self.costumer_name = costumer_name
         self.date = date
         self.table = table
         self.further_movements = further_movements
         self.suggestion = suggestion
         self.legend_data = legend_data
+        self.result = result
 
     def draw_footer(self, canvas, doc):
         canvas.saveState()
@@ -59,8 +60,10 @@ class CreatePdf:
         # Date and name
         elements.append(Paragraph(f"{self.costumer_name}, {self.date}", styles['Normal']))
         elements.append(Spacer(1, 12))
-        elements.append(Paragraph("<b>Befund:</b>", styles['Normal']))
+        elements.append(Paragraph(f"<b>Befund:</b> ${self.result}", styles['Normal']))
         elements.append(Spacer(1, 12))
+
+
 
         if self.table:
             # Convert text in data into Paragraphs to handle text wrapping

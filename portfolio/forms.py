@@ -44,6 +44,7 @@ class CreatePDfForm(forms.Form):
         input_formats=['%d.%m.%Y'],
         widget=forms.TextInput(attrs={'placeholder': 'Datum*'})
     )
+    result = forms.CharField(label='', max_length=255 ,widget=forms.TextInput(attrs={'placeholder': 'Befund*'}))
     further_movements = forms.CharField(
         label="",
         widget=forms.Textarea(attrs={'placeholder': 'Weitere Bewegungen*'})

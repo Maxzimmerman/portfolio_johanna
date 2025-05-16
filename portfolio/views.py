@@ -157,6 +157,7 @@ class PDFView(TemplateView):
         if form.is_valid() and table_form.is_valid():
             costumer_name = form.cleaned_data['costumer_name']
             date = form.cleaned_data['date']
+            result = form.cleaned_data['result']
             further_movements = form.cleaned_data['further_movements']
             suggestions = form.cleaned_data['suggestions']
 
@@ -181,7 +182,7 @@ class PDFView(TemplateView):
                 ["Abduktoren", "Wegführer"]
             ]
 
-            pdf = CreatePdf(costumer_name, date, table, further_movements, suggestions, legend_data)
+            pdf = CreatePdf(costumer_name, date, table, further_movements, suggestions, legend_data, result)
             pdf.create()
 
             try:
