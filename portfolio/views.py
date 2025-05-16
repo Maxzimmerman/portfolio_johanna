@@ -149,20 +149,16 @@ class PDFView(TemplateView):
         context['imprint'] = Imprint.objects.first()
         context['current_page'] = "other"
         context['table_form'] = PdfAdjustedBodyPartsTableFormSet(prefix="custom_table")
-        context['legend_table_form'] = PdfAdjustedBodyPartsLegendTableFormSet(prefix="custom_legend_table")
         return context
 
     def post(self, request):
         form = self.form_class(request.POST)
         table_form = PdfAdjustedBodyPartsTableFormSet(request.POST, prefix="custom_table")
-        legend_table_form = PdfAdjustedBodyPartsLegendTableFormSet(request.POST, prefix="custom_legend_table")
         if form.is_valid() and table_form.is_valid():
             costumer_name = form.cleaned_data['costumer_name']
             date = form.cleaned_data['date']
             further_movements = form.cleaned_data['further_movements']
             suggestions = form.cleaned_data['suggestions']
-            print(table_form.cleaned_data)
-            print(legend_table_form.cleaned_data)
 
             # Use submitted table data
             table = []
@@ -175,18 +171,16 @@ class PDFView(TemplateView):
                         value or ""
                     ])
 
-            # Use submitted legend table data
-            legend_data = []
-            for row in legend_table_form.cleaned_data:
-                if row:
-                    key = row.get('key')
-                    value = row.get('value')
-                    legend_data.append([
-                        str(key) if key else "",
-                        value or ""
-                    ])
-            print(table)
-            print(legend_data)
+            legend_data = [
+                ["C0/C1", "1. Kopfgelenk", "Extension", "Streckung"],
+                ["HWS", "Halswirbelsäule", "Flexion", "Beugung"],
+                ["LWS", "Lendenwirbelsäule", "Inspiration", "Einatmung"],
+                ["CTÜ", "Übergang Hals- zu Brustwirbelsäule", "Lateralflexion", "Seitwärts d. Wirbelsäule"],
+                ["BWS", "Brustwirbelsäule"],
+                ["Adduktoren", "Heranführer"],
+                ["Abduktoren", "Wegführer"]
+            ]
+
             pdf = CreatePdf(costumer_name, date, table, further_movements, suggestions, legend_data)
             pdf.create()
 

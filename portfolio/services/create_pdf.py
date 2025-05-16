@@ -5,6 +5,7 @@ from reportlab.platypus import Table, TableStyle, SimpleDocTemplate, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Image
+from reportlab.pdfgen.canvas import Canvas
 from datetime import datetime
 
 class CreatePdf:
@@ -16,13 +17,24 @@ class CreatePdf:
         self.suggestion = suggestion
         self.legend_data = legend_data
 
+    def draw_footer(self, canvas, doc):
+        canvas.saveState()
+        width, height = A4
+        footer_text1 = "Johanna Zimmermann · Prämäckerweg 19 · 60433 Frankfurt am Main · Mobil: 0151/15565862"
+        footer_text2 = "E-Mail: zimmermannjohanna233@gmail.com · www.johanna-zimmermann.com"
+
+        canvas.setFont('Helvetica', 9)
+        canvas.drawCentredString(width / 2.0, 30, footer_text1)
+        canvas.drawCentredString(width / 2.0, 18, footer_text2)
+        canvas.restoreState()
+
     def create(self):
         filename = "portfolio/services/behandlungsuebersicht.pdf"
 
         # Create document
         doc = SimpleDocTemplate(filename, pagesize=A4,
                                 rightMargin=50, leftMargin=50,
-                                topMargin=32, bottomMargin=0)
+                                topMargin=32, bottomMargin=50)
 
         styles = getSampleStyleSheet()
         elements = []
@@ -36,7 +48,7 @@ class CreatePdf:
         )
 
         # Add logo at the top of the PDF
-        logo = Image("portfolio/services/Johanna1_black_Pferd.png", width=80, height=60)
+        logo = Image("portfolio/services/logo.jpg", width=80, height=80)
         logo.hAlign = 'RIGHT'
         elements.append(logo)
 
@@ -121,11 +133,7 @@ class CreatePdf:
 
             elements.append(legend_table)
 
-        elements.append(Spacer(1, 10))
-        elements.append(Paragraph("Johanna Zimmermann · Prämäckerweg 19 · 60433 Frankfurt am Main · Mobil: 0151/15565862", centered_style))
-
-        elements.append(Paragraph("E-Mail: zimmermannjohanna233@gmail.com · www.johanna-zimmermann.com", centered_style))
 
         # Build PDF
-        doc.build(elements)
+        doc.build(elements, onFirstPage=self.draw_footer, onLaterPages=self.draw_footer)
         print("PDF created successfully.")
