@@ -1,5 +1,3 @@
-version: '3'
-
 volumes:
   portfolio_johanna_local_postgres_data: {}
   portfolio_johanna_local_postgres_data_backups: {}

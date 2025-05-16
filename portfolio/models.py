@@ -142,3 +142,10 @@ class Imprint(models.Model):
     phone = models.CharField("Telefonnummer", max_length=20)
     email = models.CharField("E-Mail", max_length=30)
     tax_number = models.CharField("Steuernummer", max_length=11, default=00000000000)
+
+
+class PdfTableAdjustedBodyPart(models.Model):
+    name = models.CharField("Name", max_length=40)
+
+    def __str__(self):
+        return self.name

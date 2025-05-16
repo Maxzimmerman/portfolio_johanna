@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views import View
-from django.views.generic import ListView, DetailView
-from .forms import ContactForm
+from django.views.generic import ListView, DetailView, TemplateView
+from .forms import ContactForm, CreatePDfForm, PdfAdjustedBodyPartsTableFormSet, PdfAdjustedBodyPartsLegendTableFormSet
 from django.conf import settings
 from django.http import FileResponse, Http404
 from django.core.mail import EmailMessage
@@ -9,6 +9,7 @@ from .models import (Home, Header, HeaderLinks,
                      Service, AboutUs, SocialIcons,
                      Contact, Footer, TextSection,
                      Imprint, PortfolioImage, Portfolio)
+from .services.create_pdf import CreatePdf
 import logging
 
 logger = logging.getLogger(__name__)
@@ -134,3 +135,67 @@ class Certificates(View):
             return render(request, 'portfolio/certificates.html', context)
         except:
             return render(request, 'portfolio/certificates.html')
+
+
+class PDFView(TemplateView):
+    template_name = 'portfolio/create_pdf.html'
+    form_class = CreatePDfForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        context['headers'] = Header.objects.prefetch_related('links')
+        context['footer'] = Footer.objects.first()
+        context['imprint'] = Imprint.objects.first()
+        context['current_page'] = "other"
+        context['table_form'] = PdfAdjustedBodyPartsTableFormSet(prefix="custom_table")
+        context['legend_table_form'] = PdfAdjustedBodyPartsLegendTableFormSet(prefix="custom_legend_table")
+        return context
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        table_form = PdfAdjustedBodyPartsTableFormSet(request.POST, prefix="custom_table")
+        legend_table_form = PdfAdjustedBodyPartsLegendTableFormSet(request.POST, prefix="custom_legend_table")
+        if form.is_valid() and table_form.is_valid():
+            costumer_name = form.cleaned_data['costumer_name']
+            date = form.cleaned_data['date']
+            further_movements = form.cleaned_data['further_movements']
+            suggestions = form.cleaned_data['suggestions']
+            print(table_form.cleaned_data)
+            print(legend_table_form.cleaned_data)
+
+            # Use submitted table data
+            table = []
+            for row in table_form.cleaned_data:
+                if row:
+                    key = row.get('key')
+                    value = row.get('value')
+                    table.append([
+                        str(key) if key else "",
+                        value or ""
+                    ])
+
+            # Use submitted legend table data
+            legend_data = []
+            for row in legend_table_form.cleaned_data:
+                if row:
+                    key = row.get('key')
+                    value = row.get('value')
+                    legend_data.append([
+                        str(key) if key else "",
+                        value or ""
+                    ])
+            print(table)
+            print(legend_data)
+            pdf = CreatePdf(costumer_name, date, table, further_movements, suggestions, legend_data)
+            pdf.create()
+
+            try:
+                return FileResponse(open('portfolio/services/behandlungsuebersicht.pdf', 'rb'),
+                                    content_type='application/pdf')
+            except FileNotFoundError:
+                raise Http404("PDF not found.")
+        else:
+            # Re-render form with errors
+            print("error")
+            return render(request, self.template_name, {'form': form})

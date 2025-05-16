@@ -14,6 +14,9 @@
             <div class="main-menu">
               <nav class="nav-menu">
                 <ul id="nav_menu">
+                  {% if user.is_superuser %}
+                    <li><a class="pdf" data-hover="PDF" href="{% url 'pdf' %}"><span>PDF erstellen</span></a></li>
+                  {% endif %}
                   {% for link in header.links.all %}
                     {% if current_page == "home" %}
                       <li><a data-hover="{{ link.data_hover }}" href="{{ link.href }}"><span>{{ link.name }}</span></a>
@@ -25,8 +28,8 @@
                   <li><a data-hover="Impressum" href="{% url 'impressum' %}"><span>Impressum</span></a></li>
                   <li><a data-hover="Datenschutzerklärung"
                          href="{% url 'data-protection' %}"><span>Datenschutzerklärung</span></a></li>
-{#                  <li><a data-hover="Zertifikate"#}
-{#                         href="{% url 'certificates' %}"><span>Zertifikate</span></a></li>#}
+                  {#                  <li><a data-hover="Zertifikate"#}
+                  {#                         href="{% url 'certificates' %}"><span>Zertifikate</span></a></li>#}
                 </ul>
               </nav>
             </div>

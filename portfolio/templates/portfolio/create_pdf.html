@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% include 'portfolio/include/header.html' %}
+  <div class="form-wrapper container" style="height: calc(100vh - 170px)">
+    <div class="contact-form" style="margin-top: 100px">
+      <h1>PDF</h1>
+      <form method="POST" action="{% url 'pdf' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <h4>Behandelte stellen</h4>
+        <div id="custom-fields-container">
+          {{ table_form.management_form }}
+
+          {% for form in table_form %}
+            <div class="custom-field">
+              {{ form|crispy }}
+              <button type="button" class="remove-field">–</button>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div id="empty-form" style="display: none;">
+          <div class="custom-field">
+            {{ table_form.empty_form|crispy }}
+            <button type="button" class="remove-field">–</button>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button style="margin-top: 20px;" type="button" id="add-field">+ Körperstelle hinzufügen</button>
+        </div>
+        <br>
+        <br>
+
+        <h4>Behandelte stellen für Legende</h4>
+        <div id="custom-fields-container-legend">
+          {{ legend_table_form.management_form }}
+
+          {% for form in legend_table_form %}
+            <div class="custom-field">
+              {{ form|crispy }}
+              <button type="button" class="remove-field">–</button>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div id="empty-form-legend" style="display: none;">
+          <div class="custom-field">
+            {{ legend_table_form.empty_form|crispy }}
+            <button type="button" class="remove-field">–</button>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button style="margin-top: 20px;" type="button" id="add-field-legend">+ Körperstelle für Legende hinzufügen</button>
+        </div>
+        <br>
+        <br>
+
+        <div class="form-submit">
+          <button type="submit" name="submit" id="cnt_submit">PDF erstellen<i
+            class="fa fa-long-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const addButton = document.getElementById('add-field');
+      const container = document.getElementById('custom-fields-container');
+      const totalForms = document.querySelector('#id_custom_table-TOTAL_FORMS');
+      const emptyFormTemplate = document.querySelector('#empty-form').innerHTML;
+      const addButtonLegend = document.getElementById('add-field-legend');
+      const containerLegend = document.getElementById('custom-fields-container-legend');
+      const totalFormsLegend = document.querySelector('#id_custom_legend_table-TOTAL_FORMS');
+      const emptyFormTemplateLegend = document.querySelector('#empty-form-legend').innerHTML;
+      const formWrapper = document.querySelector('.form-wrapper');
+
+      addButton.addEventListener('click', () => {
+        const formCount = parseInt(totalForms.value);
+        const newFormHtml = emptyFormTemplate.replace(/__prefix__/g, formCount);
+        container.insertAdjacentHTML('beforeend', newFormHtml);
+        totalForms.value = formCount + 1;
+        let currentHeight = formWrapper.style.height;
+        formWrapper.style.height = `calc(${currentHeight} + 226px)`;
+      });
+
+      addButtonLegend.addEventListener('click', () => {
+        const formCountLegend = parseInt(totalFormsLegend.value);
+        const newFormHtmlLegend = emptyFormTemplateLegend.replace(/__prefix__/g, formCountLegend);
+        containerLegend.insertAdjacentHTML('beforeend', newFormHtmlLegend);
+        totalFormsLegend.value = formCountLegend + 1;
+        let currentHeight = formWrapper.style.height;
+        formWrapper.style.height = `calc(${currentHeight} + 226px)`;
+      });
+
+      document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-field')) {
+          e.target.closest('.custom-field')?.remove();
+          e.target.closest('.custom-field-legend')?.remove()// if you wrap with class "custom-field"
+        }
+      });
+    });
+  </script>
+
+  {% include 'portfolio/include/footer.html' %}
+{% endblock %}
