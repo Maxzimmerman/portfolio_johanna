@@ -21,7 +21,7 @@ class CreatePdf:
     def draw_footer(self, canvas, doc):
         canvas.saveState()
         width, height = A4
-        footer_text1 = "Johanna Zimmermann · Prämäckerweg 19 · 60433 Frankfurt am Main · Mobil: 0151/15565862"
+        footer_text1 = "Johanna Zimmermann · Hanauer Straße 27, 63546 Hammersbach · Mobil: 0151/15565862"
         footer_text2 = "E-Mail: zimmermannjohanna233@gmail.com · www.johanna-zimmermann.com"
 
         canvas.setFont('Helvetica', 9)
@@ -49,7 +49,7 @@ class CreatePdf:
         )
 
         # Add logo at the top of the PDF
-        logo = Image("portfolio/services/logo.jpg", width=80, height=80)
+        logo = Image("portfolio/services/logo.jpg", width=100, height=100)
         logo.hAlign = 'RIGHT'
         elements.append(logo)
 
@@ -60,7 +60,7 @@ class CreatePdf:
         # Date and name
         elements.append(Paragraph(f"{self.costumer_name}, {self.date}", styles['Normal']))
         elements.append(Spacer(1, 12))
-        elements.append(Paragraph(f"<b>Befund:</b> ${self.result}", styles['Normal']))
+        elements.append(Paragraph(f"<b>Befund:</b> {self.result}", styles['Normal']))
         elements.append(Spacer(1, 12))
 
 
@@ -94,8 +94,7 @@ class CreatePdf:
 
         # further movements
         elements.append(Spacer(1, 10))
-        elements.append(Paragraph("Weitere Bewegung:", styles['Normal']))
-        elements.append(Spacer(1, 10))
+        elements.append(Paragraph("<b>Weitere Bewegung:</b>", styles['Normal']))
 
         elements.append(Spacer(1, 10))
         elements.append(Paragraph(f"{self.further_movements}", styles['Normal']))
@@ -103,7 +102,7 @@ class CreatePdf:
 
         # suggestions
         elements.append(Spacer(1, 10))
-        elements.append(Paragraph("Empfehlung:", styles['Normal']))
+        elements.append(Paragraph("<b>Empfehlung:</b>", styles['Normal']))
 
         elements.append(Spacer(1, 10))
         elements.append(Paragraph(f"{self.suggestion}", styles['Normal']))
@@ -111,7 +110,7 @@ class CreatePdf:
 
         # legend_data table
         elements.append(Spacer(1, 10))
-        elements.append(Paragraph("<b>Legende.</b>", styles['Normal']))
+        elements.append(Paragraph("<b>Legende:</b>", styles['Normal']))
 
         if self.legend_data:
             wrapped_legend_data = []
@@ -131,7 +130,7 @@ class CreatePdf:
                 ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                 ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
-                ('FONTSIZE', (0, 0), (-1, -1), 10),
+                ('FONTSIZE', (0, 0), (-1, -1), 5),
             ]))
 
             elements.append(legend_table)
